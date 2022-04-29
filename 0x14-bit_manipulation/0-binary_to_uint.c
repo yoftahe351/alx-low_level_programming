@@ -1,37 +1,56 @@
+#include <stdio.h>
 #include "main.h"
 
 /**
- * binary_to_uint - converts a binary number to an
- * unsigned int.
- * @b: binary.
- *
- * Return: unsigned int.
+* _pow - pow to 2
+* @num: number
+* @n: number of times
+* Return: result to pow to  n number
+*/
+unsigned int _pow(unsigned int num, unsigned int n)
+{
+	unsigned int sum, i;
+
+	sum = 1;
+	for (i = 0; i < n; i++)
+	{
+		sum = sum * num;
+
+	}
+	return (sum);
+}
+
+/**
+ * binary_to_uint - convert Binary to uint
+ * @b: binary number
+ * Return: the converted number or O
  */
 unsigned int binary_to_uint(const char *b)
 {
-  unsigned int ui;
-  int len, base_two;
 
-  if (!b)
-    return (0);
+	unsigned int decimal, i, k;
 
-  ui = 0;
-
-  for (len = 0; b[len] != '\0'; len++)
-    ;
-
-  for (len--, base_two = 1; len >= 0; len--, base_two *= 2)
-    {
-      if (b[len] != '0' && b[len] != '1')
+	decimal = 0;
+	i = 0;
+	decimal = 0;
+	if (b == NULL)
+		return (0);
+	for (k = 0; b[k] != '\0'; k++)
 	{
-	  return (0);
+		if (((b[k]) != '0') && ((b[k]) != '1') && ((b[k]) != '\0'))
+			return (0);
 	}
-
-      if (b[len] & 1)
+	k = k - 1;
+	while (b[i] != '\0')
 	{
-	  ui += base_two;
+		if ((b[k - i]) == '1')
+		{
+			if (i == 0)
+				decimal += 1;
+			else
+				decimal += _pow(2, i);
+		}
+		i++;
 	}
-    }
-
-  return (ui);
+	return (decimal);
 }
